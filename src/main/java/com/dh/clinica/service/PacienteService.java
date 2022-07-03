@@ -6,7 +6,6 @@ import com.dh.clinica.repository.impl.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -19,8 +18,12 @@ public class PacienteService {
         this.pacienteRepository = pacienteRepository;
     }
 
-    public Paciente guardar(Paciente p) {
-       return pacienteRepository.save(p);
+    public Paciente registrarPaciente(Paciente paciente) {
+       return pacienteRepository.save(paciente);
+    }
+
+    public void eliminar(Integer id) {
+        pacienteRepository.deleteById(id);
     }
 
     public Optional<Paciente> buscar(Integer id) {
@@ -31,9 +34,6 @@ public class PacienteService {
         return pacienteRepository.findAll();
     }
 
-    public void eliminar(Integer id) {
-        pacienteRepository.deleteById(id);
-    }
 
     public Paciente actualizar(Paciente p) {
         return pacienteRepository.save(p);

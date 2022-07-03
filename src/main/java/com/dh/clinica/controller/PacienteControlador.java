@@ -1,6 +1,5 @@
 package com.dh.clinica.controller;
 
-import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +11,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")
-public class PacienteController {
+public class PacienteControlador {
     @Autowired
     private PacienteService pacienteService;
 
-    @PostMapping("/new")
-    public ResponseEntity<String> registrarPaciente(@RequestBody Paciente p){
-        ResponseEntity<String> response = null;
+    @PostMapping("/nuevo")
+    public ResponseEntity<Paciente> registrarPaciente(@RequestBody Paciente paciente) {
 
-        if(pacienteService.guardar(p) != null){
-            response = ResponseEntity.ok("El movimiento fue registrado con éxito");
-        }else{
-            response = ResponseEntity.internalServerError().body("Ooops");
-        }
-        return response;
+        return ResponseEntity.ok(pacienteService.registrarPaciente(paciente));
+
     }
 
     @GetMapping("/{id}")
@@ -35,7 +29,7 @@ public class PacienteController {
         return ResponseEntity.ok(paciente);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/actualizar")
     public ResponseEntity<Paciente> actualizar(@RequestBody Paciente paciente) {
         ResponseEntity<Paciente> response = null;
 

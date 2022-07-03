@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OdontologoService {
+public class OdontologoServicio {
 
     private final OdontologoRepository odontologoRepository;
 
     @Autowired
-    public OdontologoService(OdontologoRepository odontologoRepository) {
+    public OdontologoServicio(OdontologoRepository odontologoRepository) {
         this.odontologoRepository = odontologoRepository;
     }
 

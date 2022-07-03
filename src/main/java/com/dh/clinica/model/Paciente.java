@@ -10,7 +10,8 @@ import java.util.Set;
 public class Paciente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "paciente_secuencia", sequenceName = "paciente_secuencia", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paciente_secuencia")
     @Column(name="id")
     private Integer id;
     private String nombre;

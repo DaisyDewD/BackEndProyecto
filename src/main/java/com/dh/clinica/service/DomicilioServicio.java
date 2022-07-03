@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 @Service
-public class DomicilioService {
+public class DomicilioServicio {
     private final DomicilioRepository domicilioRepository;
 
     @Autowired
-    public DomicilioService(DomicilioRepository domicilioRepository) {
+    public DomicilioServicio(DomicilioRepository domicilioRepository) {
         this.domicilioRepository = domicilioRepository;
     }
 
-    public Domicilio guardar(Domicilio d){
+    public Domicilio registrarDomicilio(Domicilio d){
         domicilioRepository.save(d);
         return d;
     }

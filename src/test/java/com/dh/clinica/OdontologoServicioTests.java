@@ -1,7 +1,7 @@
 package com.dh.clinica;
 
 import com.dh.clinica.model.Odontologo;
-import com.dh.clinica.service.OdontologoService;
+import com.dh.clinica.service.OdontologoServicio;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -18,33 +18,33 @@ import java.util.List;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OdontologoServiceTests {
+public class OdontologoServicioTests {
     @Autowired
-    private OdontologoService odontologoService;
+    private OdontologoServicio odontologoServicio;
 
 
     public void cargarDataSet() {
-        this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
+        this.odontologoServicio.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
     }
 
     @Test
     public void agregarOdontologo() {
         this.cargarDataSet();
-        Odontologo odontologo = odontologoService.registrarOdontologo(new Odontologo("Juan", "Ramirez", 348971960));
+        Odontologo odontologo = odontologoServicio.registrarOdontologo(new Odontologo("Juan", "Ramirez", 348971960));
         Assert.assertTrue(odontologo.getId() != null);
 
     }
 
     @Test
     public void eliminarOdontologoTest() {
-        odontologoService.eliminar(1);
-       Assert.assertTrue(odontologoService.buscar(1).isEmpty());
+        odontologoServicio.eliminar(1);
+       Assert.assertTrue(odontologoServicio.buscar(1).isEmpty());
 
     }
 
     @Test
     public void traerTodos() {
-        List<Odontologo> odontologos = odontologoService.buscarTodos();
+        List<Odontologo> odontologos = odontologoServicio.buscarTodos();
         Assert.assertTrue(!odontologos.isEmpty());
         Assert.assertTrue(odontologos.size() >= 1);
         System.out.println(odontologos);

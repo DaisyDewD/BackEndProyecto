@@ -4,9 +4,9 @@ import com.dh.clinica.model.Domicilio;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.model.Turno;
-import com.dh.clinica.service.OdontologoService;
+import com.dh.clinica.service.OdontologoServicio;
 import com.dh.clinica.service.PacienteService;
-import com.dh.clinica.service.TurnoService;
+import com.dh.clinica.service.TurnoServicio;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -21,19 +21,19 @@ import java.util.Date;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TurnoServiceTests {
+public class TurnoServicioTests {
 
     @Autowired
     private PacienteService pacienteService;
     @Autowired
-    private OdontologoService odontologoService;
+    private OdontologoServicio odontologoServicio;
     @Autowired
-    private TurnoService turnoService;
+    private TurnoServicio turnoServicio;
 
     public void cargarDataSet() {
         Domicilio domicilio = new Domicilio("Av Santa fe", "444", "CABA", "Buenos Aires");
-        Paciente p = pacienteService.guardar(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
-        this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
+        Paciente p = pacienteService.registrarPaciente(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
+        this.odontologoServicio.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
 
     }
     @Test
@@ -41,19 +41,19 @@ public class TurnoServiceTests {
 
 
         this.cargarDataSet();
-        turnoService.registrarTurno(new Turno(pacienteService.buscar(1).get(),odontologoService.buscar(1).get(),new Date()));
+        turnoServicio.registrarTurno(new Turno(pacienteService.buscar(1).get(), odontologoServicio.buscar(1).get(),new Date()));
 
-        Assert.assertNotNull(turnoService.buscar(1));
+        Assert.assertNotNull(turnoServicio.buscar(1));
 
     }
     @Test
     public void buscarTurnoTest(){
-        Assert.assertNotNull(turnoService.buscar(1));
+        Assert.assertNotNull(turnoServicio.buscar(1));
     }
     @Test
     public void eliminarTurnoTest(){
-        turnoService.eliminar(1);
-        Assert.assertFalse(turnoService.buscar(1).isPresent());
+        turnoServicio.eliminar(1);
+        Assert.assertFalse(turnoServicio.buscar(1).isPresent());
     }
 
 

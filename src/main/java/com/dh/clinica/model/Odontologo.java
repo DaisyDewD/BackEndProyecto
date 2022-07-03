@@ -9,8 +9,8 @@ import java.util.Set;
 public class Odontologo {
     //Utilizar secuencias es otra opcion para que la base de datos gestione los valores para el id
     @Id
-    @SequenceGenerator(name = "odontologo_sequence", sequenceName = "odontologo_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_sequence")
+    @SequenceGenerator(name = "odontologo_secuencia", sequenceName = "odontologo_secuencia", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_secuencia")
     private Integer id;
     private String nombre;
     private String apellido;

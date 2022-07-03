@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TurnoService {
+public class TurnoServicio {
 
     private final TurnoRepository turnoRepository;
 
     @Autowired
-    public TurnoService(TurnoRepository turnoRepository) {
+    public TurnoServicio(TurnoRepository turnoRepository) {
         this.turnoRepository = turnoRepository;
     }
 
