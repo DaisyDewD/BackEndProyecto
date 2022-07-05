@@ -4,7 +4,7 @@ package com.dh.clinica;
 
 import com.dh.clinica.model.Domicilio;
 import com.dh.clinica.model.Paciente;
-import com.dh.clinica.service.PacienteService;
+import com.dh.clinica.service.PacienteServicio;
 
 import org.junit.Assert;
 
@@ -28,14 +28,14 @@ import java.util.List;
 @SpringBootTest
 public class PacienteServiceTest {
     @Autowired
-    private PacienteService pacienteService;
+    private PacienteServicio pacienteServicio;
 
 
     public void cargarDataSet() {
         Domicilio domicilio = new Domicilio("Av Santa fe", "444", "CABA", "Buenos Aires");
-        Paciente p = pacienteService.registrarPaciente(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
+        Paciente p = pacienteServicio.registrar(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
         Domicilio domicilio1 = new Domicilio("Av Avellaneda", "333", "CABA", "Buenos Aires");
-        Paciente p1 = pacienteService.registrarPaciente(new Paciente("Micaela", "Perez", "99999999", new Date(), domicilio1));
+        Paciente p1 = pacienteServicio.registrar(new Paciente("Micaela", "Perez", "99999999", new Date(), domicilio1));
 
     }
 
@@ -43,21 +43,21 @@ public class PacienteServiceTest {
     public void agregarYBuscarPacienteTest() {
         this.cargarDataSet();
         Domicilio domicilio = new Domicilio("Calle", "123", "Temperley", "Buenos Aires");
-        Paciente p = pacienteService.registrarPaciente(new Paciente("Tomas", "Pereyra", "12345678", new Date(), domicilio));
+        Paciente p = pacienteServicio.registrar(new Paciente("Tomas", "Pereyra", "12345678", new Date(), domicilio));
 
-        Assert.assertNotNull(pacienteService.buscar(p.getId()));
+        Assert.assertNotNull(pacienteServicio.buscarPorId(p.getId()));
     }
 
     @Test
     public void eliminarPacienteTest() {
-        pacienteService.eliminar(3);
-        Assert.assertTrue(pacienteService.buscar(3).isEmpty());
+        pacienteServicio.eliminar(3);
+        Assert.assertTrue(pacienteServicio.buscarPorId(3).isEmpty());
 
     }
 
     @Test
     public void traerTodos() {
-        List<Paciente> pacientes = pacienteService.buscarTodos();
+        List<Paciente> pacientes = pacienteServicio.buscarTodos();
         Assert.assertTrue(!pacientes.isEmpty());
         Assert.assertTrue(pacientes.size() == 2);
         System.out.println(pacientes);

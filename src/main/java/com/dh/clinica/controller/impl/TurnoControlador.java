@@ -1,8 +1,10 @@
-package com.dh.clinica.controller;
+package com.dh.clinica.controller.impl;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Turno;
 import com.dh.clinica.service.OdontologoServicio;
-import com.dh.clinica.service.PacienteService;
+import com.dh.clinica.service.PacienteServicio;
 import com.dh.clinica.service.TurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,22 +20,27 @@ public class TurnoControlador {
     @Autowired
     private TurnoServicio turnoServicio;
     @Autowired
-    private PacienteService pacienteService;
+    private PacienteServicio pacienteServicio;
     @Autowired
     private OdontologoServicio odontologoServicio;
 
     @PostMapping("/nuevo")
-    public ResponseEntity<Turno> registrarTurno(@RequestBody Turno turno) {
+    public ResponseEntity<Turno> registrarTurno(@RequestBody Turno turno) throws ResourceNotFoundException, BadRequestException {
         ResponseEntity<Turno> response;
-        if (pacienteService.buscar(turno.getPaciente().getId()).isPresent() && odontologoServicio.buscar(turno.getOdontologo().getId()).isPresent())
-            response = ResponseEntity.ok(turnoServicio.registrarTurno(turno));
+        if (pacienteServicio.buscarPorId(turno.getPaciente().getId()).isPresent() && odontologoServicio.buscarPorId(turno.getOdontologo().getId()).isPresent())
+            response = ResponseEntity.ok(turnoServicio.registrar(turno));
 
         else
             response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
         return response;
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Turno> buscarPorId(@PathVariable Integer id) {
+        Turno turno = turnoServicio.buscar(id).orElse(null);
 
+        return ResponseEntity.ok(turno);
     }
 
     @GetMapping("/todos")
@@ -42,7 +49,7 @@ public class TurnoControlador {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
+    public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException {
         ResponseEntity<String> response;
         if (turnoServicio.buscar(id).isPresent()) { // Esta validacion no esta en el enunciado del ejericio, pero se las dejo para que la tengan.
             turnoServicio.eliminar(id);

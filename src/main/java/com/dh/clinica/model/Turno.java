@@ -1,6 +1,7 @@
 package com.dh.clinica.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -70,4 +71,5 @@ public class Turno {
                 ", date=" + date +
                 '}';
     }
+
 }

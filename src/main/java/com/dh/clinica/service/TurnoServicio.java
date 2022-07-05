@@ -18,7 +18,7 @@ public class TurnoServicio {
         this.turnoRepository = turnoRepository;
     }
 
-    public Turno registrarTurno(Turno turno) {
+    public Turno registrar(Turno turno) {
         return turnoRepository.save(turno);
     }
 

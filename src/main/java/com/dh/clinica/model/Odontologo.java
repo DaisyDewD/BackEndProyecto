@@ -1,8 +1,7 @@
 package com.dh.clinica.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "odontologos")
@@ -26,13 +25,16 @@ public class Odontologo {
         this.matricula = matricula;
     }
 
+   
+
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public boolean setId(Integer id) {
         this.id = id;
+        return false;
     }
 
     public String getNombre() {
@@ -70,4 +72,7 @@ public class Odontologo {
                 ", matricula=" + matricula +
                 '}';
     }
+
+
+
 }

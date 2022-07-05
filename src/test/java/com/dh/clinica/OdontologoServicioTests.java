@@ -1,6 +1,9 @@
 package com.dh.clinica;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
+import com.dh.clinica.model.Turno;
 import com.dh.clinica.service.OdontologoServicio;
 
 import org.junit.Assert;
@@ -13,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
+import java.util.Date;
 import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -23,27 +27,27 @@ public class OdontologoServicioTests {
     private OdontologoServicio odontologoServicio;
 
 
-    public void cargarDataSet() {
-        this.odontologoServicio.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
+    public void cargarDataSet() throws BadRequestException {
+        this.odontologoServicio.registrar(new Odontologo("Santiago", "Paz", 3455647));
     }
 
     @Test
-    public void agregarOdontologo() {
+    public void registrarOdontologo() throws  BadRequestException {
         this.cargarDataSet();
-        Odontologo odontologo = odontologoServicio.registrarOdontologo(new Odontologo("Juan", "Ramirez", 348971960));
+        Odontologo odontologo = odontologoServicio.registrar(new Odontologo("Juan", "Ramirez", 348971960));
         Assert.assertTrue(odontologo.getId() != null);
 
     }
 
     @Test
-    public void eliminarOdontologoTest() {
+    public void eliminarOdontologoTest() throws ResourceNotFoundException, BadRequestException {
         odontologoServicio.eliminar(1);
-       Assert.assertTrue(odontologoServicio.buscar(1).isEmpty());
+       Assert.assertTrue(odontologoServicio.buscarPorId(1).isEmpty());
 
     }
 
     @Test
-    public void traerTodos() {
+    public void traerTodosLosOdontologos(){
         List<Odontologo> odontologos = odontologoServicio.buscarTodos();
         Assert.assertTrue(!odontologos.isEmpty());
         Assert.assertTrue(odontologos.size() >= 1);

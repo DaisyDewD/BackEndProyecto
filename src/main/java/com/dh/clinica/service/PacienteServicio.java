@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 @Service
-public class PacienteService {
+public class PacienteServicio {
 
     private final PacienteRepository pacienteRepository;
 
     @Autowired
-    public PacienteService(PacienteRepository pacienteRepository) {
+    public PacienteServicio(PacienteRepository pacienteRepository) {
         this.pacienteRepository = pacienteRepository;
     }
 
-    public Paciente registrarPaciente(Paciente paciente) {
+    public Paciente registrar(Paciente paciente) {
        return pacienteRepository.save(paciente);
     }
 
@@ -26,7 +26,7 @@ public class PacienteService {
         pacienteRepository.deleteById(id);
     }
 
-    public Optional<Paciente> buscar(Integer id) {
+    public Optional<Paciente> buscarPorId(Integer id) {
         return pacienteRepository.findById(id);
     }
 
@@ -38,4 +38,6 @@ public class PacienteService {
     public Paciente actualizar(Paciente p) {
         return pacienteRepository.save(p);
     }
+
+
 }
