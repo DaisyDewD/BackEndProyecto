@@ -21,10 +21,14 @@ public class OdontologoControlador implements CRUDController<Odontologo> {
     private OdontologoServicio odontologoServicio;
 
     @PostMapping("/nuevo")
-    public ResponseEntity<Odontologo> registrar(@RequestBody Odontologo odontologo)throws BadRequestException, ResourceNotFoundException {
-
-        Odontologo odontologoRegistrado = odontologoServicio.registrar(odontologo);
-        return ResponseEntity.ok(odontologoRegistrado);
+    public ResponseEntity<String> registrar(@RequestBody Odontologo odontologo){
+        ResponseEntity<String> respuesta = null;
+        if (odontologoServicio.registrar(odontologo)!=null){
+            respuesta = ResponseEntity.ok("Odontólogo creado con éxito");
+        }else{
+            respuesta = ResponseEntity.internalServerError().body("Oops");
+        }
+        return respuesta;
     }
 
     @GetMapping("/{id}")
@@ -53,7 +57,7 @@ public class OdontologoControlador implements CRUDController<Odontologo> {
 
         if (odontologoServicio.buscarPorId(id).isPresent()) {
             odontologoServicio.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
+            response = ResponseEntity.ok("Se eliminó el odontólogo con id " + id);
         } else {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

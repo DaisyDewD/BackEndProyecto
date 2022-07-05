@@ -3,7 +3,6 @@ package com.dh.clinica;
 import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
-import com.dh.clinica.model.Turno;
 import com.dh.clinica.service.OdontologoServicio;
 
 import org.junit.Assert;
@@ -16,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
-import java.util.Date;
 import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -34,8 +32,8 @@ public class OdontologoServicioTests {
     @Test
     public void registrarOdontologo() throws  BadRequestException {
         this.cargarDataSet();
-        Odontologo odontologo = odontologoServicio.registrar(new Odontologo("Juan", "Ramirez", 348971960));
-        Assert.assertTrue(odontologo.getId() != null);
+        String odontologo = odontologoServicio.registrar(new Odontologo("Juan", "Ramirez", 348971960));
+        Assert.assertTrue(odontologo != null);
 
     }
 

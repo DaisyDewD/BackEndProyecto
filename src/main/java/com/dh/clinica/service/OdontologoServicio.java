@@ -1,9 +1,11 @@
 package com.dh.clinica.service;
 
 import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.GlobalExceptionsHandler;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.repository.impl.OdontologoRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OdontologoServicio {
+public class OdontologoServicio extends GlobalExceptionsHandler {
+    private static Logger log = Logger.getLogger(OdontologoServicio.class);
 
     private final OdontologoRepository odontologoRepository;
 
@@ -19,17 +22,26 @@ public class OdontologoServicio {
     public OdontologoServicio(OdontologoRepository odontologoRepository) {
         this.odontologoRepository = odontologoRepository;
     }
-
-    public Odontologo registrar(Odontologo odontologo) throws BadRequestException{
-        if(odontologo == null)
-            throw  new BadRequestException("No pueden haber campos vacíos");
-        return odontologoRepository.save(odontologo);
-
+    public String registrar(Odontologo odontologo) {
+        if (odontologoRepository.save(odontologo) != null){ ;
+        log.info("Dentista eliminado");
+        return "Nuevo odontólogo guardado";
+    }else{
+        log.error("Algo malió sal");
+        return "Algo malió sal";
+        }
     }
+    //public Odontologo registrar(Odontologo odontologo) throws BadRequestException{
+    //    if(odontologo == null)
+    //        throw  new BadRequestException("No pueden haber campos vacíos");
+    //    return odontologoRepository.save(odontologo);
+    //}
 
     public void eliminar(Integer id) throws ResourceNotFoundException, BadRequestException {
-        if(buscarPorId(id).isEmpty())
-            throw  new ResourceNotFoundException("No existe odontólogo con id: "+ id);
+        if (id == null || id < 1)
+        throw new BadRequestException("El id del odontólogo no puede ser null ni negativo");
+        if (!odontologoRepository.existsById(id))
+            throw new ResourceNotFoundException("No existe ningún odontólogo con id: " + id);
         odontologoRepository.deleteById(id);
     }
 

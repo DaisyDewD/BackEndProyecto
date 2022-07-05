@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="clinica-odontologica" />
         <module name="Clinica-odontologica woking" />
+        <module name="Copia de Clinica-odontologica_CRUD_2" />
+        <module name="clinica-odontologica" />
         <module name="Clinica-odontologica_git" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Clinica-odontologica woking" options="-parameters" />
       <module name="Clinica-odontologica_git" options="-parameters" />
+      <module name="Copia de Clinica-odontologica_CRUD_2" options="-parameters" />
       <module name="clinica-odontologica" options="-parameters" />
     </option>
   </component>
