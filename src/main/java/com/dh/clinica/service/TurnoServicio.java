@@ -1,7 +1,9 @@
 package com.dh.clinica.service;
 
+import com.dh.clinica.exceptions.GlobalExceptionsHandler;
 import com.dh.clinica.model.Turno;
 import com.dh.clinica.repository.impl.TurnoRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TurnoServicio {
+public class TurnoServicio extends GlobalExceptionsHandler {
+    private static Logger log = Logger.getLogger(OdontologoServicio.class);
 
     private final TurnoRepository turnoRepository;
 
@@ -22,7 +25,7 @@ public class TurnoServicio {
         return turnoRepository.save(turno);
     }
 
-    public List<Turno> listar() {
+    public List<Turno> buscarTodos() {
         return turnoRepository.findAll();
     }
 
@@ -34,7 +37,7 @@ public class TurnoServicio {
         return turnoRepository.save(turno);
     }
 
-    public Optional<Turno> buscar(Integer id) {
+    public Optional<Turno> buscarPorId(Integer id) {
         return turnoRepository.findById(id);
     }
 

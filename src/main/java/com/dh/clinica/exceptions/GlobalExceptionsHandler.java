@@ -9,15 +9,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionsHandler {
 
-    private final Logger logger = Logger.getLogger(GlobalExceptionsHandler.class);
+    private final Logger log = Logger.getLogger(GlobalExceptionsHandler.class);
 
     @ExceptionHandler({BadRequestException.class})
     public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex) {
+        log.error(ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
     @ExceptionHandler({ResourceNotFoundException.class})
     public ResponseEntity<String> procesarErrorNotFound(ResourceNotFoundException ex) {
+        log.error(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 

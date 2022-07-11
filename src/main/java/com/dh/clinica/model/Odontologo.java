@@ -1,6 +1,10 @@
 package com.dh.clinica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -14,6 +18,7 @@ public class Odontologo {
     private String nombre;
     private String apellido;
     private Integer matricula;
+
 
 
     public Odontologo() {
