@@ -3,6 +3,7 @@ package com.dh.clinica.controller.impl;
 import com.dh.clinica.controller.CRUDController;
 import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
+import com.dh.clinica.model.Paciente;
 import com.dh.clinica.model.Turno;
 import com.dh.clinica.service.OdontologoServicio;
 import com.dh.clinica.service.PacienteServicio;

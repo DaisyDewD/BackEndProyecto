@@ -4,6 +4,10 @@ package com.dh.clinica.service;
 import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.GlobalExceptionsHandler;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
+<<<<<<< HEAD
+=======
+import com.dh.clinica.model.Odontologo;
+>>>>>>> 8943bfb32cf38b3fbcc201f1776325fbec48297b
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.repository.impl.PacienteRepository;
 import org.apache.log4j.Logger;

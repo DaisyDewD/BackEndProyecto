@@ -9,14 +9,18 @@
         <module name="Clinica-odontologica woking" />
         <module name="Copia de Clinica-odontologica_CRUD_2" />
         <module name="clinica-odontologica" />
+        <module name="Copia de Clinica-odontologica_1erException" />
         <module name="Clinica-odontologica_git" />
+        <module name="Clinica-odontologica_1erException" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Clinica-odontologica woking" options="-parameters" />
+      <module name="Clinica-odontologica_1erException" options="-parameters" />
       <module name="Clinica-odontologica_git" options="-parameters" />
+      <module name="Copia de Clinica-odontologica_1erException" options="-parameters" />
       <module name="Copia de Clinica-odontologica_CRUD_2" options="-parameters" />
       <module name="clinica-odontologica" options="-parameters" />
     </option>
