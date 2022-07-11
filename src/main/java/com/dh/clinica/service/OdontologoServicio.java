@@ -22,30 +22,29 @@ public class OdontologoServicio extends GlobalExceptionsHandler {
     public OdontologoServicio(OdontologoRepository odontologoRepository) {
         this.odontologoRepository = odontologoRepository;
     }
-    public String registrar(Odontologo odontologo) {
-        if (odontologoRepository.save(odontologo) != null){ ;
-        log.info("Dentista eliminado");
-        return "Nuevo odontólogo guardado";
-    }else{
-        log.error("Algo malió sal");
+    public String registrar(Odontologo odontologo) throws BadRequestException {
+        if (odontologoRepository.save(odontologo) != null)
+            log.info("Odontólogo registrado con éxito");
+        if (odontologo == null)
+            throw new BadRequestException("Algo salió mal, revise los campos");
         return "Algo malió sal";
         }
-    }
-    //public Odontologo registrar(Odontologo odontologo) throws BadRequestException{
-    //    if(odontologo == null)
-    //        throw  new BadRequestException("No pueden haber campos vacíos");
-    //    return odontologoRepository.save(odontologo);
-    //}
+
 
     public void eliminar(Integer id) throws ResourceNotFoundException, BadRequestException {
         if (id == null || id < 1)
-        throw new BadRequestException("El id del odontólogo no puede ser null ni negativo");
+        throw new BadRequestException("El id del odontólogo no puede estar vacío ni negativo");
         if (!odontologoRepository.existsById(id))
             throw new ResourceNotFoundException("No existe ningún odontólogo con id: " + id);
         odontologoRepository.deleteById(id);
     }
 
     public Optional<Odontologo> buscarPorId(Integer id) throws ResourceNotFoundException, BadRequestException{
+        if (id == null || id < 1)
+            throw new BadRequestException("El id del odontólogo no puede estar vacío ni negativo");
+        Odontologo odontologo = odontologoRepository.findById(id).orElse(null);
+        if (odontologo == null)
+            throw new ResourceNotFoundException("El odontólogo no existe");
         return odontologoRepository.findById(id);
     }
 

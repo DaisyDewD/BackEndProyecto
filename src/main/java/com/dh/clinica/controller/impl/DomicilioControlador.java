@@ -10,24 +10,14 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/domicilios")
+@RequestMapping()
 public class DomicilioControlador {
 
 
     private DomicilioServicio domicilioServicio;
 
-    @PostMapping("/nuevo")
+    @PostMapping()
     public ResponseEntity<Domicilio> registrar(@RequestBody Domicilio domicilio) {
         return ResponseEntity.ok(domicilioServicio.registrarDomicilio(domicilio));
     }
-
-
-
-    @GetMapping("/todos")
-    public ResponseEntity<List<Domicilio>> buscarTodos(){
-        return ResponseEntity.ok(domicilioServicio.buscarTodos());
-    }
-
-
-
 }

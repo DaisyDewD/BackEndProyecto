@@ -8,6 +8,7 @@ import com.dh.clinica.service.OdontologoServicio;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +31,26 @@ public class OdontologoServicioTests {
     }
 
     @Test
+    @Order(1)
     public void registrarOdontologo() throws  BadRequestException {
         this.cargarDataSet();
-        String odontologo = odontologoServicio.registrar(new Odontologo("Juan", "Ramirez", 348971960));
+        String odontologo = String.valueOf(odontologoServicio.registrar(new Odontologo("Juan", "Ramirez", 348971960)));
         Assert.assertTrue(odontologo != null);
 
     }
 
     @Test
+    @Order(3)
     public void eliminarOdontologoTest() throws ResourceNotFoundException, BadRequestException {
+
         odontologoServicio.eliminar(1);
        Assert.assertTrue(odontologoServicio.buscarPorId(1).isEmpty());
 
     }
 
+
     @Test
+    @Order(2)
     public void traerTodosLosOdontologos(){
         List<Odontologo> odontologos = odontologoServicio.buscarTodos();
         Assert.assertTrue(!odontologos.isEmpty());
