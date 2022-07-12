@@ -28,9 +28,7 @@ public class TurnoControlador implements CRUDController<Turno> {
 
     @PostMapping("/nuevo")
     public ResponseEntity<String> registrar(@RequestBody Turno turno) throws ResourceNotFoundException, BadRequestException {
-
         ResponseEntity<String> respuesta = null;
-
         if(turnoServicio.registrar(turno) != null){
             respuesta = ResponseEntity.ok("El turno fue registrado con éxito");
         }else{
@@ -50,13 +48,9 @@ public class TurnoControlador implements CRUDController<Turno> {
     //    return response;
     //}
 
-
-
-
     @GetMapping("/{id}")
     public ResponseEntity<Turno> buscarPorId(@PathVariable Integer id) {
         Turno turno = turnoServicio.buscarPorId(id).orElse(null);
-
         return ResponseEntity.ok(turno);
     }
 
@@ -68,7 +62,7 @@ public class TurnoControlador implements CRUDController<Turno> {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException {
         ResponseEntity<String> response;
-        if (turnoServicio.buscarPorId(id).isPresent()) { // Esta validacion no esta en el enunciado del ejericio, pero se las dejo para que la tengan.
+        if (turnoServicio.buscarPorId(id).isPresent()) {
             turnoServicio.eliminar(id);
             response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
         } else {
@@ -77,12 +71,8 @@ public class TurnoControlador implements CRUDController<Turno> {
         return response;
     }
 
-
     @PutMapping("/actualizar")
     public ResponseEntity<Turno> actualizar(@RequestBody Turno turno) {
         return ResponseEntity.ok(turnoServicio.actualizar(turno));
-
     }
-
-
 }

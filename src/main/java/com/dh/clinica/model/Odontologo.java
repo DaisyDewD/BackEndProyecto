@@ -1,16 +1,11 @@
 package com.dh.clinica.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
 
 @Entity
 @Table(name = "odontologos")
 public class Odontologo {
-    //Utilizar secuencias es otra opcion para que la base de datos gestione los valores para el id
+
     @Id
     @SequenceGenerator(name = "odontologo_secuencia", sequenceName = "odontologo_secuencia", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_secuencia")
@@ -18,7 +13,6 @@ public class Odontologo {
     private String nombre;
     private String apellido;
     private Integer matricula;
-
 
 
     public Odontologo() {
@@ -30,7 +24,7 @@ public class Odontologo {
         this.matricula = matricula;
     }
 
-   
+
 
 
     public Integer getId() {
@@ -65,7 +59,6 @@ public class Odontologo {
     public void setMatricula(Integer matricula) {
         this.matricula = matricula;
     }
-
 
 
     @Override

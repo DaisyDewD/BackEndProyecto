@@ -1,14 +1,10 @@
 package com.dh.clinica;
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8943bfb32cf38b3fbcc201f1776325fbec48297b
 import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Domicilio;
-import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.service.PacienteServicio;
 import org.junit.Assert;

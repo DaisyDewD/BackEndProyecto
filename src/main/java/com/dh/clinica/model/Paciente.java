@@ -1,11 +1,8 @@
 package com.dh.clinica.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "pacientes")
@@ -25,12 +22,8 @@ public class Paciente {
     private Domicilio domicilio;
 
 
-
-
     public Paciente() {
     }
-
-
 
     public Paciente(String nombre, String apellido, String dni, Date fechaIngreso, Domicilio domicilio) {
 
@@ -89,7 +82,6 @@ public class Paciente {
     public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
     }
-
 
 
     @Override

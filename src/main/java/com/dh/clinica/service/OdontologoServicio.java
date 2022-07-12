@@ -22,13 +22,14 @@ public class OdontologoServicio extends GlobalExceptionsHandler {
     public OdontologoServicio(OdontologoRepository odontologoRepository) {
         this.odontologoRepository = odontologoRepository;
     }
+
     public String registrar(Odontologo odontologo) throws BadRequestException {
         if (odontologoRepository.save(odontologo) != null)
             log.info("Odontólogo registrado con éxito");
         if (odontologo == null)
             throw new BadRequestException("Algo salió mal, revise los campos");
         return "Algo malió sal";
-        }
+    }
 
 
     public void eliminar(Integer id) throws ResourceNotFoundException, BadRequestException {
@@ -57,7 +58,6 @@ public class OdontologoServicio extends GlobalExceptionsHandler {
             throw new BadRequestException("No pueden haber campos vacíos");
         if (odontologo.getId() == null)
             throw new BadRequestException("El id del odontólogo no puede estar vacío");
-
         return odontologoRepository.save(odontologo);
     }
 }

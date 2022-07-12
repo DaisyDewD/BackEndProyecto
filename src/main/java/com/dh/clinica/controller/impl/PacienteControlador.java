@@ -3,11 +3,6 @@ package com.dh.clinica.controller.impl;
 import com.dh.clinica.controller.CRUDController;
 import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
-<<<<<<< HEAD
-=======
-import com.dh.clinica.model.Domicilio;
-import com.dh.clinica.model.Odontologo;
->>>>>>> 8943bfb32cf38b3fbcc201f1776325fbec48297b
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.service.PacienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +37,6 @@ public class PacienteControlador implements CRUDController<Paciente> {
         return ResponseEntity.ok(paciente);
     }
 
-
     @PutMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Paciente paciente)throws BadRequestException, ResourceNotFoundException {
         ResponseEntity<String> respuesta = null;
@@ -61,7 +55,6 @@ public class PacienteControlador implements CRUDController<Paciente> {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
         ResponseEntity<String> respuesta = null;
-
         if (pacienteServicio.buscarPorId(id).isPresent()) {
         pacienteServicio.eliminar(id);
         respuesta = ResponseEntity.ok("Se eliminó el odontólogo con id " + id);
@@ -71,7 +64,7 @@ public class PacienteControlador implements CRUDController<Paciente> {
         respuesta = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe paciente con el Id: " + id);
         }
         return respuesta;
-        }
+    }
 
     @GetMapping("/todos")
     public ResponseEntity<List<Paciente>> buscarTodos(){

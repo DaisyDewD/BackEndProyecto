@@ -1,6 +1,5 @@
 package com.dh.clinica.service;
 
-
 import com.dh.clinica.exceptions.GlobalExceptionsHandler;
 import com.dh.clinica.model.Domicilio;
 import com.dh.clinica.repository.impl.DomicilioRepository;
@@ -24,12 +23,15 @@ public class DomicilioServicio extends GlobalExceptionsHandler {
         domicilioRepository.save(d);
         return d;
     }
+
     public Optional<Domicilio> buscar(Integer id){
         return Optional.of(domicilioRepository.getOne(Integer.valueOf(id)));
     }
+
     public List<Domicilio> buscarTodos(){
         return domicilioRepository.findAll();
     }
+
     public void eliminar(Integer id){
         domicilioRepository.deleteById(Integer.valueOf(id));
     }

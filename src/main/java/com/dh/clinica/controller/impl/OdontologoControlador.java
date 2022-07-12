@@ -5,11 +5,11 @@ import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.service.OdontologoServicio;
+import org.attoparser.IProcessingInstructionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -19,7 +19,6 @@ import java.util.List;
 public class OdontologoControlador implements CRUDController<Odontologo> {
     @Autowired
     private OdontologoServicio odontologoServicio;
-
 
 
     @PostMapping("/nuevo")
@@ -38,14 +37,12 @@ public class OdontologoControlador implements CRUDController<Odontologo> {
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscarPorId(@PathVariable Integer id) throws BadRequestException, ResourceNotFoundException {
         Odontologo odontologo = odontologoServicio.buscarPorId(id).orElse(null);
-
         return ResponseEntity.ok(odontologo);
     }
 
     @PutMapping("/actualizar")
     public ResponseEntity<String> actualizar(@RequestBody Odontologo odontologo) throws BadRequestException, ResourceNotFoundException{
         ResponseEntity<String> respuesta = null;
-
         if (odontologo.getId() != null && odontologoServicio.buscarPorId(odontologo.getId()).isPresent()){
             odontologoServicio.actualizar(odontologo);
             respuesta = ResponseEntity.ok("Odontólogo actualizado");
@@ -55,12 +52,11 @@ public class OdontologoControlador implements CRUDController<Odontologo> {
             respuesta = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Odontólogo no encontrado");
         }
         return respuesta;
-        }
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Integer id) throws BadRequestException, ResourceNotFoundException {
         ResponseEntity<String> respuesta = null;
-
         if (odontologoServicio.buscarPorId(id).isPresent()) {
             odontologoServicio.eliminar(id);
             respuesta = ResponseEntity.ok("Se eliminó el odontólogo con id " + id);
@@ -70,17 +66,10 @@ public class OdontologoControlador implements CRUDController<Odontologo> {
             respuesta = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe odontólogo con el Id: " + id);
         }
             return respuesta;
-        }
-
-
-
-
+    }
 
     @GetMapping("/todos")
     public ResponseEntity<List<Odontologo>> buscarTodos() {
         return ResponseEntity.ok(odontologoServicio.buscarTodos());
     }
-
-
-
 }
